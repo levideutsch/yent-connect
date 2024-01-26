@@ -100,8 +100,17 @@ To logout simply click the menu button which is located on the top left corner o
 ![image](readme_photos/logout.png)
 
 
+# Updates
+This is not a final product!
+Updates will be coming soon.
+
+# Hours
+45 Hours put into creating this project.
+(Hours will be updated after each update)
 
 
+## UI:
+https://mui.com/
 
 
 
