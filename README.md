@@ -48,5 +48,5 @@ To quit the server, in the same terminal press CTRL + C.
 
 ## How it works
 Instantly, you will be brought to the Welcome Page, where you can either Login or Signup. if you already have an account, simply Login, if you don't, join the club by pressing the Signup button. 
-![image](welcome-page.png)
+![image](readme_photos/welcome-page.png)
 
