@@ -11,10 +11,12 @@ import Login from "./Login";
 import Signup from "./Signup";
 import UserAccount from "./UserAccount";
 import LatestPost from "./LatestPost";
-import SingleUser from "./SingleUser";
+// import UserProfile from "./UserProfile"
 import Chat from "./Chat";
 import TestHomePage from "./TesHomePage";
 import ExplorePage from "./ExplorePage";
+import NewUserProfile from "./NewUserProfile";
+
 
 
 const AppWrapper = ({ children }) => {
@@ -32,7 +34,7 @@ function App() {
     return (
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<WelcomePage />} />
+          <Route exact path="/*" element={<WelcomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
@@ -48,9 +50,9 @@ function App() {
           <Route exact path="/test-home" element={<TestHomePage />} />
           <Route exact path="/explore" element={<ExplorePage />} />
           <Route exact path="/account" element={<UserAccount />} />
-          <Route exact path="/latest-post" element={<LatestPost />} />
-          <Route exact path="/user/:userId" element={<SingleUser />} />
+          {/* <Route exact path="/latest-post" element={<LatestPost />} /> */}
           <Route exact path="/user/:userId/chat/:chatId" element={<Chat />} />
+          <Route exact path="/new-user-profile/:userId" element={<NewUserProfile />} />
         </Routes>
         </AppWrapper>
       </BrowserRouter>

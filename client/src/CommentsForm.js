@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import SendIcon from '@mui/icons-material/Send';
 import api from './util/api';
 
-function CommentsForm({ postId, allPosts, setAllPosts }) {
+function CommentsForm({ postId }) {
   const [commentBody, setCommentBody] = useState('');
   const {user, addNewComment} = useContext(UserContext)
 

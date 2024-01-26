@@ -5,7 +5,7 @@ import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import api from './util/api';
 
 function Relationship({ userId }) {
-  const { user } = useContext(UserContext);
+  const { user, relationships, setRelationships } = useContext(UserContext);
   const [doesFollow, setDoesFollow] = useState(null);
 
   useEffect(() => {
@@ -24,6 +24,7 @@ function Relationship({ userId }) {
       console.log("Error fetching relationship data");
     }
   };
+
 
   const handleFollow = () => {
     if (doesFollow) {
@@ -52,7 +53,13 @@ function Relationship({ userId }) {
       })
         .then(response => response.json())
         .then(data => {
+          console.log(data)
           if (!data.errors) {
+            
+            setRelationships({
+              ...relationships,
+              following: [data, ...relationships.following],
+            });
             console.log("Successfully followed user");
             setDoesFollow(true);
           } else {
@@ -64,6 +71,7 @@ function Relationship({ userId }) {
         });
     }
   };
+  
 
   return (
     <div onClick={handleFollow}>

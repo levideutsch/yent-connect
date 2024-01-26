@@ -64,37 +64,44 @@ class PostsController < ApplicationController
     #     render json: { posts: serialized_posts }
     #   end
     #final
-    def index
-        # Get the users that the current_user follows
-        following_users = current_user.following
+    # def index
+    #     # Get the users that the current_user follows
+    #     following_users = current_user.following
       
-        # Get posts from those following users and the current_user in descending order
-        posts = Post.where(user: [current_user] + following_users).order(created_at: :desc)
+    #     # Get posts from those following users and the current_user in descending order
+    #     posts = Post.where(user: [current_user] + following_users).order(created_at: :desc)
       
-        serialized_posts = PostSerializer.new(posts, include: [:comments]).serializable_hash[:data].map do |post|
-          attributes = post[:attributes]
-          attributes[:comments] = post[:relationships][:comments][:data]
-                                    .map { |comment_data| Comment.find(comment_data[:id]) }
-                                    .sort_by(&:created_at)
-                                    .reverse
-                                    .map { |comment| CommentSerializer.new(comment).serializable_hash[:data][:attributes] }
-          attributes
-        end
+    #     serialized_posts = PostSerializer.new(posts, include: [:comments]).serializable_hash[:data].map do |post|
+    #       attributes = post[:attributes]
+    #       attributes[:comments] = post[:relationships][:comments][:data]
+    #                                 .map { |comment_data| Comment.find(comment_data[:id]) }
+    #                                 .sort_by(&:created_at)
+    #                                 .reverse
+    #                                 .map { |comment| CommentSerializer.new(comment).serializable_hash[:data][:attributes] }
+    #       attributes
+    #     end
       
-        render json: { posts: serialized_posts }
-      end
+    #     render json: { posts: serialized_posts }
+    #   end
       
           
         
 
     def create 
+   
         post = current_user.posts.create!(post_params)
         render json: post
     end
 
     private
 
+    # def post_params
+    #     params.require(:post).permit(:body, :image)
+    # end
     def post_params
-        params.require(:post).permit(:body, :image)
+
+        allowed_params = params.require(:post).permit(:body, :image)
+        allowed_params.delete_if { |key, value| value.blank? || value == ""  || value == "null"}
     end
+
 end

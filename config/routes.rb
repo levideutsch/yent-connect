@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :profiles
   resources :relationships
   resources :likes
   resources :messages
@@ -45,4 +46,9 @@ Rails.application.routes.draw do
   get "current-users-relationships", to: "relationships#current_user_relationships"
   post "follow-user/:userId", to: "relationships#follow_user"
   delete "unfollow-user/:userId", to: "relationships#unfollow_user"
+
+  get "relationship-by-id/:userId", to: "relationships#relationship_by_id"
+
+  get "all-users-with-profiles", to: "users#all_users_with_profiles"
+  patch "edit-profile", to: "profiles#edit_profile"
 end

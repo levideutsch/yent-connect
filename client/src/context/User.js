@@ -8,15 +8,38 @@ function UserProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userSettings, setUserSettings] = useState(null)
-  const [allPosts, setAllPosts] = useState([])
   const [errors, setErrors] = useState([]);
   const [clientValidations, setClientValidations] = useState(null)
   const [allUsers, setAllUsers] = useState([])
   const [relationships, setRelationships] = useState([])
   const [allUsersPosts, setAllUsersPosts] = useState([])
+  const [blah, setBlah] = useState([])
+ 
+
+  const filteredPostsFollowingOnly = allUsersPosts.posts?.filter((post) => {
+    
+    return (
+      relationships?.following?.some((followingUser) => followingUser?.id === post?.user_id) ||
+      user?.id === post?.user_id
+    );
+  });
 
 
+//  const changeFollowing = useCallback(async () => {
+//   const filteredPostsFollowingOnly = allUsersPosts.posts?.filter((post) => {
+    
+//     return (
+//       relationships?.following?.some((followingUser) => followingUser?.id === post?.user_id) ||
+//       user?.id === post?.user_id
+//     );
+//   } );
+//   setBlah(filteredPostsFollowingOnly)
+//  }, [])
 
+//  console.log(blah)
+
+
+  
   const getMe = useCallback(async () => {
     const data = await api("me").then(r => r.json())
     setUser(data)
@@ -25,10 +48,6 @@ function UserProvider({ children }) {
   }, [])
 
 
-  const getPosts = useCallback(async () => {
-    const posts = await api("posts").then(r => r.json())
-    setAllPosts(posts)
-  })
 
   const getAllUsersPosts = useCallback(async () => {
     const posts = await api("all-users-posts").then(r => r.json())
@@ -46,13 +65,8 @@ function UserProvider({ children }) {
     setRelationships(relationships)
   })
 
-
-
-
-
   useEffect(() => {
     getMe()
-    getPosts()
     getAllUsers()
     getRelationships()
     getAllUsersPosts()
@@ -75,7 +89,7 @@ function UserProvider({ children }) {
 
 
 const addNewComment = (newComment, postId) => {
-    setAllPosts((prevPosts) => ({
+  setAllUsersPosts((prevPosts) => ({
       posts: prevPosts.posts.map((post) =>
         post.id === postId ? { ...post, comments: [newComment, ...post.comments] } : post
       )
@@ -83,37 +97,16 @@ const addNewComment = (newComment, postId) => {
   };
 
 
-
- 
-
-
-
-
-
-
   return (
     <UserContext.Provider value={{ 
-        login,
-        logout,
-        signup,
-        loggedIn,
-        userSettings,
-        setUserSettings,
-        user,
-        errors,
-        setErrors,
-        clientValidations,
-        setClientValidations,
-        allPosts,
-        setAllPosts,
+        login, logout, signup, loggedIn,
+        userSettings, setUserSettings, user,
+        errors, setErrors,
+        clientValidations, setClientValidations,
         allUsers,
         addNewComment,
-        // allLikes,
-        // setAllLikes
-        relationships,
-        setRelationships,
-
-        allUsersPosts, setAllUsersPosts
+        relationships, setRelationships,
+        allUsersPosts, setAllUsersPosts, filteredPostsFollowingOnly
        }}>
       {children}
     </UserContext.Provider>

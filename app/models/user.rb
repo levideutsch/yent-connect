@@ -25,6 +25,8 @@ class User < ApplicationRecord
     has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
     has_many :followers, through: :passive_relationships, source: :follower
 
+    has_one :profile
+
   def follow(user)
     # Create active relationship (user.first follows user.last)
     active_relationships.create(followed_id: user.id)

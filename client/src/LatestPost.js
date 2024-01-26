@@ -1,18 +1,18 @@
-import React, { useContext, useEffect, useReducer } from "react"
-import { UserContext } from "./context/User"
+// import React, { useContext, useEffect, useReducer } from "react"
+// import { UserContext } from "./context/User"
 
-function LatestPost() {
-    const {allPosts, seAllPosts} = useContext(UserContext)
-console.log(allPosts)
-    useEffect(() => {
+// function LatestPost() {
+//     const {allPosts, seAllPosts} = useContext(UserContext)
+// console.log(allPosts)
+//     useEffect(() => {
 
-    }, [allPosts])
+//     }, [allPosts])
 
-    return (
-        <div>
-            <p>{allPosts.body}</p>
-            <img src={allPosts.post_image_url}></img>
-        </div>
-    )
-}
-export default LatestPost
+//     return (
+//         <div>
+//             <p>{allPosts.body}</p>
+//             <img src={allPosts.post_image_url}></img>
+//         </div>
+//     )
+// }
+// export default LatestPost

@@ -1,15 +1,3 @@
-// import TestHomePage from "./TesHomePage"
-// function ExplorePage() {
-//     return (
-//         <div>
-//             <br />
-//             <TestHomePage />
-//             explore page
-//         </div>
-//     )
-// }
-// export default ExplorePage
-
 import React, { useState, useContext  } from 'react';
 import { UserContext } from './context/User';
 import { styled } from '@mui/material/styles';
@@ -37,6 +25,7 @@ import LikeButton from './LikeButton';
 import api from './util/api';
 import Relationship from './Relationship';
 import TestHomePage from './TesHomePage';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -61,7 +50,7 @@ const CenteredCardContainer = styled('div')({
 function ExplorePage() {
   const [expandedId, setExpandedId] = useState(null);
   const [postFormOpen, setPostFormOpen] = useState(false);
-  const { allUsersPosts, setAllUsersPosts, allUsers } = useContext(UserContext);
+  const { allUsersPosts, setAllUsersPosts, allUsers, user } = useContext(UserContext);
 
 
   const handleExpandClick = (postId) => {
@@ -77,68 +66,73 @@ function clickLike() {
 }
 
   return (
-    <div>
+    <div style={{backgroundColor: "black"}}>
         <br />
         <TestHomePage />
       <CenteredCardContainer>
         {allUsersPosts?.posts?.map((post) => (
-          <Card key={post.id} sx={{ maxWidth: 345, marginBottom: 5 }}>
+          <Card key={post.id} sx={{width:400, maxWidth: 345, marginBottom: 5 }}>
             <CardHeader
               avatar={
-                <Link to={`/user/${allUsers.filter(u => u.id === post.user_id).map((filteredUser) => filteredUser.id)}`}>
+                <Link to={`/new-user-profile/${allUsers.filter(u => u.id === post.user_id).map((filteredUser) => filteredUser.id)}`}>
                 <Avatar sx={{ bgcolor: '#000' }} aria-label="recipe">
                   {allUsers
                     .filter((user) => user.id === post.user_id)
                     .map((filteredUser) => (
-                      filteredUser.username[0].toUpperCase()
+                      <React.Fragment key={filteredUser.id}>
+                        {filteredUser?.profile?.profile_photo_url ? (
+                          <img src={filteredUser?.profile?.profile_photo_url} alt="profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }}/>
+                        ) : (
+                          filteredUser.username[0].toUpperCase()
+                        )}
+                      </React.Fragment>
                     ))}
                 </Avatar>
-                </Link>
+              </Link>
               }
-              
               action={allUsers.
                 filter((user) => user.id === post.user_id)
                 .map((filteredUser) => (
+                    filteredUser.id === user.id ? <Link to={`/new-user-profile/${user.id}`} style={{ textDecoration: 'none', color: 'inherit' }}><AccountCircleIcon /></Link> :
                     <Relationship key={filteredUser.id} userId={filteredUser.id}/>
                 ))
-                // <IconButton aria-label="settings">
-                //   <MoreVertIcon />
-                // </IconButton>
-        
               }
-              title="Shrimp and Chorizo Paella"
+              title={allUsers
+                .filter((user) => user.id === post.user_id).map(filteredUser => filteredUser?.username)
+            }
               subheader={new Intl.DateTimeFormat('en-US', {
                 dateStyle: 'medium',
               }).format(new Date(post.created_at))}
             />
-            <CardMedia
-              component="div"
-              style={{
-                width: '100%',
-                height: '200px',
-                overflow: 'hidden',
-              }}
-            >
-              <img
+            {post.post_image_url ?
+                <CardMedia
+                component="div"
                 style={{
-                  objectFit: 'cover',
                   width: '100%',
-                  height: '100%',
+                  height: '200px',
+                  overflow: 'hidden',
                 }}
-                src={post.post_image_url}
-                alt="Paella dish"
-              />
-            </CardMedia>
+              >
+                <img
+                  style={{
+                    objectFit: 'cover',
+                    width: '100%',
+                    height: '100%',
+                  }}
+                  src={post.post_image_url}
+                  alt="Paella dish"
+                />
+              </CardMedia>
+            :
+            null
+              }
             <CardContent>
               <Typography variant="body2" color="text.secondary">
                 {post.body}
               </Typography>
             </CardContent>
             <CardActions disableSpacing>
-         
             <LikeButton click={clickLike} postId={post.id}/>
-
-
               <IconButton aria-label="share">
                 <ShareIcon />
               </IconButton>
@@ -148,7 +142,11 @@ function clickLike() {
                 aria-expanded={expandedId === post.id}
                 aria-label="show more"
               >
-               {!post?.comments.length ? "No comments" : `${post?.comments.length} Comment${post?.comments.length !== 1 ? 's' : ''}`}
+               {!post?.comments.length ? (
+                  <Typography variant="body2" style={{ fontSize: 'small' }}>No comments</Typography>
+                ) : (
+                  <Typography variant="body2" style={{ fontSize: 'small' }}>{`${post?.comments.length} Comment${post?.comments.length !== 1 ? 's' : ''}`}</Typography>
+                )}
                 <ExpandMoreIcon />
               </ExpandMore>
             </CardActions>
@@ -158,8 +156,9 @@ function clickLike() {
               unmountOnExit
             >
               <Box maxHeight="300px" overflow="auto">
-                <Typography textAlign="center" paragraph>
-                  Comments:
+                <Typography textAlign="center" paragraph style={{ fontSize: 'small' }}>
+                <a style={{ fontSize: 'small' }}>Comments:</a>
+                  
                 </Typography>
                 {post?.comments?.map((comment, index) => (
                   <CardContent key={index}>
@@ -175,8 +174,6 @@ function clickLike() {
               </Box>
               <CommentsForm
                 postId={post.id}
-                allPosts={allUsersPosts}
-                setAllPosts={setAllUsersPosts}
               />
             </Collapse>
           </Card>
