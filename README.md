@@ -49,8 +49,8 @@ To quit the server, in the same terminal press CTRL + C.
 ## How it works
 Instantly, you will be brought to the Welcome Page, where you can either Login or Signup. if you already have an account, simply Login, if you don't, join the club by pressing the Signup button. 
 ![image](readme_photos/welcome-page.png)
-![image](readme_photos/login-page.png)
-![image](readme_photos/signup-page.png)
+![image](readme_photos/login-page-2.png)
+![image](readme_photos/signup-page-2.png)
 
 Once logged in you will be brought to the home page where you will be able to see all your posts and your friends posts. Additionally you will have the option to explore posts from users you don't follow.
 ![image](readme_photos/home-page-1.png)
