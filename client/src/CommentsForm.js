@@ -53,7 +53,7 @@ function CommentsForm({ postId }) {
       >
         <TextField
           id="outlined-basic"
-          label="Outlined"
+          label="Add Comment"
           variant="outlined"
           sx={{ flex: 1 }}
           value={commentBody}

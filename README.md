@@ -49,4 +49,40 @@ To quit the server, in the same terminal press CTRL + C.
 ## How it works
 Instantly, you will be brought to the Welcome Page, where you can either Login or Signup. if you already have an account, simply Login, if you don't, join the club by pressing the Signup button. 
 ![image](readme_photos/welcome-page.png)
+![image](readme_photos/login-page.png)
+![image](readme_photos/signup-page.png)
+
+Once logged in you will be brought to the home page where you will be able to see all your posts and your friends posts. Additionally you will have the option to explore posts from users you don't follow.
+![image](readme_photos/home-page-1.png)
+![image](readme_photos/explore-page.png)
+You can toggle "Hide" to hide all users. Once all users are hidden you'll have the option to toggle "See who to follow.
+
+
+# Commenting on posts
+![image](readme_photos/comment-form-page.png)
+
+# Liking posts
+![image](readme_photos/liking-post.png)
+
+# Creating post
+![image](readme_photos/creating-post-page.png)
+
+# Profiles
+Click on profile icon which is located on top right corner of page.
+![image](readme_photos/my-profile-page.png)
+
+To View all other users profiles simply click on their profile photo anywhere in the application.
+![image](readme_photos/other-profile-page.png)
+
+Toggle through users page to view their posts, who they are following, and who follows them.
+![image](readme_photos/toggle-posts.png)
+![image](readme_photos/toggle-followers.png)
+
+
+
+
+
+
+
+
 
