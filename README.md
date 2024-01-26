@@ -65,7 +65,7 @@ You can toggle "Hide" to hide all users. Once all users are hidden you'll have t
 ![image](readme_photos/liking-post.png)
 
 # Creating post
-![image](readme_photos/creating-post-page.png)
+![image](readme_photos/create-post-page.png)
 
 # Profiles
 Click on profile icon which is located on top right corner of page.
