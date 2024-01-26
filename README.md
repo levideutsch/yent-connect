@@ -79,6 +79,23 @@ Toggle through users page to view their posts, who they are following, and who f
 ![image](readme_photos/toggle-followers.png)
 
 
+# Settings
+Click settings icon which is located at top left corner of profile page to view your settings page.
+
+Here you're able to change what ever settings you like. Additionally you can change your sex, location and profile photo.
+![image](readme_photos/settings-page.png)
+
+# Messaging
+To message a user simply navigate to their profile page and click on the message icon.
+![image](readme_photos/message-icon.png)
+
+Once clicked a pop-up will appear.
+![image](readme_photos/message-popup.png)
+
+Once you click yes you'll be sent to the chat page.
+![image](readme_photos/chat-page.png)
+
+
 
 
 
