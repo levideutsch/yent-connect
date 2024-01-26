@@ -95,6 +95,9 @@ Once clicked a pop-up will appear.
 Once you click yes you'll be sent to the chat page.
 ![image](readme_photos/chat-page.png)
 
+# Logging out
+To logout simply click the menu button which is located on the top left corner of the page, then click logout in the drop-down.
+![image](readme_photos/logout.png)
 
 
 
